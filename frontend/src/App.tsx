@@ -8,6 +8,7 @@ function App() {
   return (
     <div className='App'>
       <div className='search-bar-form'>
+      <h1>City search</h1>
         <SearchBar/>
         <div>SearchResults</div>
       </div>
