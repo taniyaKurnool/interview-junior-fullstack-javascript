@@ -1,10 +1,18 @@
-import React, {useState} from "react";
+import React, {useState, useEffect, ChangeEvent} from "react";
+import axios from 'axios';
 import "./SearchBar.css";
 
 
+interface City {
+    _id: string;
+    name: string;
+    country: string;
+  }
 
-export const SearchBar = () => {
-  const [input, setInput] = useState("")
+export const SearchBar: React.FC = () => {
+  const [input, setInput] = useState("");
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [searchResults, setSearchResults] = useState<City[]>([]);
 
   const fetchData = (value:any) => {
     fetch("")
