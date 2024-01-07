@@ -1,64 +1,35 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
-import mongoose from 'mongoose';
-import bodyParser from 'body-parser';
-import cors from 'cors';
+import fs from 'fs';
 
 dotenv.config();
 
 const app: Express = express();
-const port = process.env.PORT || 8000 ;
+const port = process.env.PORT;
 
+app.use(express.json());
 
-app.use(cors());
-app.use(bodyParser.json());
+// Read cities from the JSON file
+const citiesPath = '/Users/taniya.kurnool/Projekte/interview-junior-fullstack-javascript/database/cities.json';
+let cities: { uuid: number; cityName: string; count: number }[] = [];
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/citiesDB', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-interface City {
-  _id: string;
-  name: string;
-  country: string;
+try {
+  const citiesData = fs.readFileSync(citiesPath, 'utf-8');
+  cities = JSON.parse(citiesData);
+} catch (error) {
+  console.error('Error reading cities data:', error);
 }
 
-const citySchema = new mongoose.Schema<City>({
-  name: String,
-  country: String,
-  // Add more fields as needed
+// Endpoint to get cities
+app.get('/cities', (_req: Request, res: Response) => {
+  res.json(cities);
 });
 
-const CityModel = mongoose.model<City>('City', citySchema);
-
-// CRUD endpoints
-app.get('/cities', async (_req: Request, res: Response) => {
-  try {
-    const cities = await CityModel.find();
-    res.json(cities);
-  } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
-
-app.post('/cities', async (req: Request, res: Response) => {
-  const { name, country } = req.body;
-  const newCity = new CityModel({ name, country });
-  try {
-    const savedCity = await newCity.save();
-    res.json(savedCity);
-  } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
-
-// Implement update and delete endpoints similarly
+// Rest of the code remains unchanged
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
-
 
 
 // app.get('/', (req: Request, res: Response) => {

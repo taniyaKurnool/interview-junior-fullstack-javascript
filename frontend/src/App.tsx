@@ -3,14 +3,13 @@ import './App.css'
 import { SearchBar } from './components/SearchBar'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <div className='App'>
       <div className='search-bar-form'>
       <h1>City search</h1>
         <SearchBar/>
-        <div>SearchResults</div>
+        <div>Results</div>
       </div>
     </div>
   );
