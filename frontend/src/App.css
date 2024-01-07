@@ -1,5 +1,5 @@
 .App {
-  background-color: #f8ecec;
+  background: linear-gradient(-20deg, #8600b3 50%, #cc33ff 50%);
   height: 100vh;
   width: 100vw;
 }
@@ -17,5 +17,5 @@
 
 h1 {
   text-align: center;
-  color: blueviolet;
+  color: rgb(250, 250, 250);
 }

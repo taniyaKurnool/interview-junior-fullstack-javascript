@@ -8,9 +8,11 @@ const app: Express = express();
 const port = process.env.PORT;
 
 app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+
 
 // Read cities from the JSON file
-const citiesPath = '/Users/taniya.kurnool/Projekte/interview-junior-fullstack-javascript/database/cities.json';
+const citiesPath = 'cities.json';
 let cities: { uuid: number; cityName: string; count: number }[] = [];
 
 try {
@@ -22,10 +24,9 @@ try {
 
 // Endpoint to get cities
 app.get('/cities', (_req: Request, res: Response) => {
-  res.json(cities);
+  res.json({cities: true});
 });
 
-// Rest of the code remains unchanged
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
