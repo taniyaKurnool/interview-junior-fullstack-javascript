@@ -1,0 +1,45 @@
+GET http://127.0.0.1:8080/cityList/Ha HTTP/2.0
+
+###
+
+POST http://127.0.0.1:8080/city HTTP/2.0
+Content-Type: application/json
+
+{
+  "cityName": "Friedberg",
+  "count": 611
+}
+
+###
+
+POST http://127.0.0.1:8080/city HTTP/2.0
+Content-Type: application/x-www-form-urlencoded
+
+cityName=Giessen&count=35390
+
+###
+
+GET http://127.0.0.1:8080/cities HTTP/2.0
+
+###
+
+GET http://127.0.0.1:8080/city/2 HTTP/2.0
+
+###
+
+PUT http://127.0.0.1:8080/city/105 HTTP/3
+Content-Type: application/json
+
+{
+  "cityName": "TestStadt",
+  "count": 1234
+}
+
+###
+
+DELETE http://127.0.0.1:8080/city/105 HTTP/2.0
+
+###
+
+
+
